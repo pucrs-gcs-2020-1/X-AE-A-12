@@ -1,6 +1,12 @@
-# gcs_t1_20201 (o repositório deve ser renomeado para um nome à escolha do grupo)
+# TEAM X-AE-A-12
 Repositório Inicial do Tabalho 1 GCS 2020/1
 
 Componentes do time:
-- Nome1
-- Nome2
+- Aloisio Bastian
+- David Bertrand
+- Gabriel Miola
+- Guilherme Canto
+- Hiago Luzardo
+- Jorge Rosa
+- Nicholas Silva
+- Vanderson Nery
