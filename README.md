@@ -6,6 +6,7 @@ Repositório Inicial do Tabalho 1 GCS 2020/1
 - David Bertrand
 - Gabriel Miola
 - Guilherme Canto
+- Guilherme Silva
 - Hiago Luzardo
 - Jorge Rosa
 - Nicholas Silva
@@ -32,7 +33,8 @@ A nomenclatura do merge será o nome da branch acrescida ao seu inicio a palavra
 ### Comunicação
 Toda a comunicação do time será feita por estes canais
 - discord: https://discord.gg/zFjDB7V
-- backlog: ...
+- backlog: https://github.com/pucrs-gcs-2020-1/X-AE-A-12/issues
+- tasks: https://github.com/pucrs-gcs-2020-1/X-AE-A-12/projects/3
 
 ## Projeto
 O projeto consiste em desenvolver um sistema de registro de recebimentos e pagamentos de uma empresa. Funcionando como um *livro caixa*, local de armazenamento de registros contábeis das empresas ao longo do tempo.
