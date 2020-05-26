@@ -1,14 +1,19 @@
 package br.pucrs.gcs.xaea12.model;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public final class Conta {
-	private final int numero;
-	private final Calendar criacao;
-	private final Operador operador;
+public final class Conta implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int numero;
+	private Calendar criacao;
+	private Operador operador;
 	private double saldo;
 	private List<Movimento> movimentos;
 	
@@ -60,5 +65,4 @@ public final class Conta {
 			this.saldo = Double.valueOf(df.format(this.saldo + mov.getValor()));
 		}
 	}
-
 }

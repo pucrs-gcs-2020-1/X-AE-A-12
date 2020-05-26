@@ -1,9 +1,17 @@
 package br.pucrs.gcs.xaea12.model;
 
-public final class Operador {
-	private final int codigo;
-	private final String nome;
-	private final String iniciais;
+import java.io.Serializable;
+
+//import br.pucrs.gcs.xaea12.xml.Xmlcripto;
+
+public final class Operador implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private int codigo;
+	private String nome;
+	private String iniciais;
 	
 	public Operador(int codigo, String nome, String iniciais) {
 		this.codigo = codigo;
