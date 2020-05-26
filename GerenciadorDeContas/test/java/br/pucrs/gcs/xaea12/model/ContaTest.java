@@ -1,6 +1,5 @@
 package br.pucrs.gcs.xaea12.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
