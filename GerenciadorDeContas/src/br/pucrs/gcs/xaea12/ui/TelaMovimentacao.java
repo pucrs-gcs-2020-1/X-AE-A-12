@@ -84,13 +84,21 @@ public class TelaMovimentacao {
 				String nroDocInformado = nroDoc.getText();
 				String descricaoInformada = descricao.getText();
 				String valorInformado = valor.getText();
-				String regex = "\\d{2}/\\d{2}/\\d{4}";
+				String regexData = "[0-3][0-9]/[0-1][0-9]/[1-2][0-9][0-9][0-9]";
+				String regexNroDoc = "[0-9]+";
+				String regexValor = "[0-9]+.\\d{2}";
 				Calendar dataFinal = null;
-				if(!dataInformada.matches(regex)){
-					JOptionPane.showMessageDialog(null, "Por favor preencha a data no padr\u00E3o ano/mes/ano.", "Erro no formato da data.", JOptionPane.ERROR_MESSAGE);
+				if(!dataInformada.matches(regexData)){
+					JOptionPane.showMessageDialog(null, "Por favor preencha a data no padr\u00E3o ano/mes/ano e com uma data válida.", "Erro no formato da data.", JOptionPane.ERROR_MESSAGE);
+				}
+				if(!nroDocInformado.matches(regexNroDoc)){
+					JOptionPane.showMessageDialog(null, "Por favor preencha o campo somente com numeros.", "Erro no formato do numero do documento.", JOptionPane.ERROR_MESSAGE);
+				}
+				if(!valorInformado.matches(regexValor)){
+					JOptionPane.showMessageDialog(null, "Por favor preencha o campo no seguinte formato 11.25.", "Erro no formato do valor.", JOptionPane.ERROR_MESSAGE);
 				}
 				else{
-					if(dataInformada == null || nroDocInformado == null || descricaoInformada == null || valorInformado == null) {
+					if(descricaoInformada.equals("")) {
 						JOptionPane.showMessageDialog(null, "Por favor preencha todos campos.", "Erro de confirmacao.", JOptionPane.ERROR_MESSAGE);
 					}
 					else{
