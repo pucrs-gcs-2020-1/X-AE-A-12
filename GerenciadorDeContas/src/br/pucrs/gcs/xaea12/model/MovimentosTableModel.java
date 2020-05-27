@@ -16,6 +16,28 @@ public class MovimentosTableModel extends AbstractTableModel {
 	}
 
 	@Override
+	public String getColumnName(int column) {
+		switch (column) {
+		case 0:
+			return "Data";
+
+		case 1:
+			return "Operador";
+
+		case 2:
+			return "NroDoc";
+
+		case 3:
+			return "Descrição";
+
+		case 4:
+			return "Valor";
+
+		}
+		return null;
+	}
+
+	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
 		return 5;
@@ -45,7 +67,7 @@ public class MovimentosTableModel extends AbstractTableModel {
 			return m.getDescricao();
 
 		case 4:
-			Locale brasil = new Locale("pt", "BR");
+			Locale brasil = new Locale("pt-br", "BR");
 			NumberFormat nf = NumberFormat.getCurrencyInstance(brasil);
 			return nf.format(m.getValor());
 
