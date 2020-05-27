@@ -34,4 +34,9 @@ public final class Operador implements Serializable {
 	public boolean isOperador(String inicial) {
 		return this.iniciais.equals(inicial);
 	}
+	
+	@Override
+	public String toString() {
+		return iniciais;
+	}
 }
