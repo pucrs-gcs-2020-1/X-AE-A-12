@@ -82,7 +82,7 @@ public class TelaPrincipal {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				TelaMovimentacao tmov = new TelaMovimentacao(db.getOperadores().get(idxOperador));
+				TelaMovimentacao tmov = new TelaMovimentacao(db.getOperadores().get(idxOperador), db.getContas().get(idxConta));
 			}
 		});
 		painelBotoes.add(btnMovimento);
