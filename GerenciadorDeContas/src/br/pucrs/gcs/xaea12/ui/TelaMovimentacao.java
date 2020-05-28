@@ -15,15 +15,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import br.pucrs.gcs.xaea12.model.Conta;
 import br.pucrs.gcs.xaea12.model.Movimento;
 import br.pucrs.gcs.xaea12.model.Operador;
 
 public class TelaMovimentacao {
 
 	private JFrame movimentacao;
+	private Conta conta;
 	private Operador operador;
 	
-	public TelaMovimentacao(Operador operador) {
+	public TelaMovimentacao(Operador operador, Conta conta) {
+		this.conta = conta;
 		this.operador = operador;
 		addMovimentacao();
 	}
@@ -112,6 +115,7 @@ public class TelaMovimentacao {
 						int nroDocFinal = Integer.parseInt(nroDocInformado);  
 						double valorfinal = Double.parseDouble(valorInformado);  
 						Movimento movimentacao = new Movimento(dataFinal, operador, nroDocFinal, descricaoInformada, valorfinal);
+						conta.addMovimento(movimentacao);
 					}
 				}
 			}
