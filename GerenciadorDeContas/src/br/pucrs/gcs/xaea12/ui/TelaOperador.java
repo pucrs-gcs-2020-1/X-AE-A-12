@@ -41,9 +41,11 @@ public class TelaOperador {
 	private List<Operador> operadores;
 	private DBXml dbData;
 	private Operador operadorEscolhido;
+	private TelaSelecaoOperador telaSelOp;
 
-	public TelaOperador(DBXml dbData) {
+	public TelaOperador(DBXml dbData, TelaSelecaoOperador telaSelOp) {
 		this.dbData = dbData;
+		this.telaSelOp = telaSelOp;
 		this.operadores = new ArrayList<>();
 		this.operadores = this.dbData.getOperadores();
 		initialize();
@@ -64,6 +66,7 @@ public class TelaOperador {
 		frame.getContentPane().setLayout(null);
 		this.titulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.titulo.setBounds(82, 30, 326, 14);
+		frame.setTitle("Cadastro de operador");
 		
 		frame.getContentPane().add(this.titulo);
 		this.selecionarOperador.setBounds(193, 249, 124, 20);
@@ -103,10 +106,14 @@ public class TelaOperador {
 					codigo = Integer.parseInt(codigoInformado);
 					Operador operador = new Operador(codigo, nomeInformado, iniciaisInformadas);
 					dbData.addOperadores(operador);
+					telaSelOp.addOperador(operador);
+					txtOperador.setText(null);
+					txtNome.setText(null);
+					txtIniciais.setText(null);
 					frame.revalidate();
 				    frame.repaint();
 				}
-				
+
 			}
 		});
 		
@@ -141,7 +148,6 @@ public class TelaOperador {
 				frame.setVisible(false);
 			}
 		});
-				
 	}
 	
 	private Operador getOperador() {
