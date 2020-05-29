@@ -42,7 +42,8 @@ public class TelaPrincipal extends JFrame {
 	private JTable tbMovimentos;
 	private int idxOperador = 7; // index do operador na lista
 	private int idxConta = 5; // index da conta na lista
-	private TelaSelecaoOperador tselop;
+	private TelaSelecaoOperador tSelOp;
+	private TelaOperador tOp;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -55,7 +56,6 @@ public class TelaPrincipal extends JFrame {
 	private void montaTela() {
 		carregaBanco();
 		preparaTela();
-		selecionaOperador(); // Chamar a tela de seleção do operador
 		preparaPainel();
 		preparaRodape();
 		preparaTabela();
@@ -67,6 +67,7 @@ public class TelaPrincipal extends JFrame {
 		preparaBtnMovimento();
 		preencheTabela();
 		mostraTela();
+		selecionaOperador();
 	}
 
 	private void mostraTela() {
@@ -131,9 +132,8 @@ public class TelaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				tselop.mostraTela(db);
-				tselop.setLocationRelativeTo(tela);
-				System.out.println(idxOperador);
+				tSelOp.mostraTela(db);
+				tSelOp.setLocationRelativeTo(tela);
 				preencheDadosTela();
 				tela.revalidate();
 			}
@@ -147,7 +147,7 @@ public class TelaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				TelaOperador top = new TelaOperador(db, tselop);
+				tOp.mostraTela();
 			}
 		});
 		painelBotoes.add(btnNewOperador);
@@ -213,7 +213,10 @@ public class TelaPrincipal extends JFrame {
 	}
 
 	private void selecionaOperador() {
-		// Chama a tela de escolha do operador ao iniciar o programa
+		tSelOp.mostraTela(db);
+		tSelOp.setLocationRelativeTo(tela);
+		preencheDadosTela();
+		tela.revalidate();
 	}
 
 	private void carregaBanco() {
@@ -223,8 +226,10 @@ public class TelaPrincipal extends JFrame {
 
 	private void preparaTela() {
 		tela = new JFrame("Gerenciador de Contas - versão: 0.1");
-		tselop = new TelaSelecaoOperador(tela, db, this);
-		tselop.iniciar();
+		tSelOp = new TelaSelecaoOperador(tela, db, this);
+		tOp = new TelaOperador(tela, db, tSelOp);
+		tOp.iniciar();
+		tSelOp.iniciar();
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		widthHeight = Toolkit.getDefaultToolkit().getScreenSize();
 	}
