@@ -72,7 +72,7 @@ public class TelaSelecaoOperador extends JDialog {
 		frame.getContentPane().setLayout(null);
 		this.titulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.titulo.setBounds(163, 32, 191, 14);
-		frame.setTitle("Cadastro de operador");
+		frame.setTitle("Selecione o operador");
 
 		frame.getContentPane().add(this.titulo);
 		this.selecionarOperador.setBounds(214, 77, 124, 20);

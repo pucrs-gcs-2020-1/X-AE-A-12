@@ -1,13 +1,10 @@
 package br.pucrs.gcs.xaea12.ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
@@ -15,16 +12,15 @@ import br.pucrs.gcs.xaea12.model.Operador;
 import br.pucrs.gcs.xaea12.xml.DBXml;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class TelaOperador {
 
-	private JFrame frame;
+	private JDialog frame;
 	private final JLabel titulo = new JLabel("Cadastre um operador ou escolha um existente");
-	private final JComboBox<Operador> selecionarOperador = new JComboBox<Operador>();
 	private final JSeparator separator = new JSeparator();
 	private final JLabel labelCodOperador = new JLabel("C\u00F3digo do operador");
 	private final JTextField txtOperador = new JTextField();
@@ -33,45 +29,35 @@ public class TelaOperador {
 	private final JTextField txtIniciais = new JTextField();
 	private final JLabel labelIniciais = new JLabel("Iniciais");
 	private final JButton cadastrar = new JButton("Cadastrar");
-	private final JButton selecionar = new JButton("Selecionar");
-	private final JLabel labelSelecioneOOperador = new JLabel("Selecione o operador");
 	private final JSeparator separator_1 = new JSeparator();
 	private final JButton voltar = new JButton("Voltar");
-	
-	private List<Operador> operadores;
+
 	private DBXml dbData;
-	private Operador operadorEscolhido;
 	private TelaSelecaoOperador telaSelOp;
 
-	public TelaOperador(DBXml dbData, TelaSelecaoOperador telaSelOp) {
+	public TelaOperador(JFrame frame, DBXml dbData, TelaSelecaoOperador telaSelOp) {
 		this.dbData = dbData;
 		this.telaSelOp = telaSelOp;
-		this.operadores = new ArrayList<>();
-		this.operadores = this.dbData.getOperadores();
-		initialize();
-		this.getOperador();
 	}
 
-	private void initialize() {
+	void iniciar() {
 		this.txtIniciais.setBounds(214, 155, 181, 20);
 		this.txtIniciais.setColumns(10);
 		this.txtNome.setBounds(214, 127, 181, 20);
 		this.txtNome.setColumns(10);
 		this.txtOperador.setBounds(214, 96, 181, 20);
 		this.txtOperador.setColumns(10);
-		frame = new JFrame();
+		frame = new JDialog();
+		frame.setModal(true);
 		frame.setBounds(100, 100, 483, 349);
-		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		this.titulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		this.titulo.setBounds(82, 30, 326, 14);
 		frame.setTitle("Cadastro de operador");
 		
 		frame.getContentPane().add(this.titulo);
-		this.selecionarOperador.setBounds(193, 249, 124, 20);
-		
-		frame.getContentPane().add(this.selecionarOperador);
+
 		this.separator.setBounds(32, 64, 407, 2);
 		
 		frame.getContentPane().add(this.separator);
@@ -117,26 +103,10 @@ public class TelaOperador {
 			}
 		});
 		
-		for(Operador op:operadores) {
-			selecionarOperador.addItem(op);
-		}
-		
 		this.cadastrar.setBounds(214, 186, 95, 23);
 		frame.getContentPane().add(this.cadastrar);
-
-		this.selecionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				operadorEscolhido = (Operador) selecionarOperador.getSelectedItem();
-				frame.setVisible(false);
-			}
-		});
-		this.selecionar.setBounds(350, 248, 95, 23);
 		
-		frame.getContentPane().add(this.selecionar);
-		this.labelSelecioneOOperador.setBounds(56, 252, 130, 14);
-		
-		frame.getContentPane().add(this.labelSelecioneOOperador);
-		this.separator_1.setBounds(32, 224, 407, 2);
+		this.separator_1.setBounds(32, 250, 407, 2);
 		
 		frame.getContentPane().add(this.separator_1);
 		this.voltar.setBounds(350, 186, 95, 23);
@@ -149,8 +119,8 @@ public class TelaOperador {
 			}
 		});
 	}
-	
-	private Operador getOperador() {
-		return operadorEscolhido;
+
+	public void mostraTela(){
+		frame.setVisible(true);
 	}
 }
