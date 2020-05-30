@@ -9,12 +9,26 @@ import javax.swing.table.AbstractTableModel;
 
 public class MovimentosTableModel extends AbstractTableModel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final List<Movimento> movimentos;
+	private double total = 0;
 	
 	public MovimentosTableModel(List<Movimento> movimentos) {
 		this.movimentos = movimentos;
+		for(Movimento m : this.movimentos) {
+			this.total += m.getValor();
+		}
 	}
-
+	
+	public String getTotal() {
+		Locale brasil = new Locale("pt-br", "BR");
+		NumberFormat nf = NumberFormat.getCurrencyInstance(brasil);
+		return nf.format(this.total);
+	}
+	
 	@Override
 	public String getColumnName(int column) {
 		switch (column) {

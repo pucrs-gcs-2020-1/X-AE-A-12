@@ -319,7 +319,7 @@
         <timezone>America/Sao_Paulo</timezone>
       </criacao>
       <operador reference="../../../operadores/br.pucrs.gcs.xaea12.model.Operador[4]"/>
-      <saldo>9996.0</saldo>
+      <saldo>10746.0</saldo>
       <movimentos>
         <br.pucrs.gcs.xaea12.model.Movimento>
           <data>
@@ -390,6 +390,26 @@
           <nrdoc>198</nrdoc>
           <descricao>Movimento 0 c: 6</descricao>
           <valor>1428.0</valor>
+        </br.pucrs.gcs.xaea12.model.Movimento>
+        <br.pucrs.gcs.xaea12.model.Movimento>
+          <data>
+            <time>1590721200000</time>
+            <timezone>America/Sao_Paulo</timezone>
+          </data>
+          <operador reference="../../../../../operadores/br.pucrs.gcs.xaea12.model.Operador[8]"/>
+          <nrdoc>39393</nrdoc>
+          <descricao>Teste</descricao>
+          <valor>300.0</valor>
+        </br.pucrs.gcs.xaea12.model.Movimento>
+        <br.pucrs.gcs.xaea12.model.Movimento>
+          <data>
+            <time>1590721200000</time>
+            <timezone>America/Sao_Paulo</timezone>
+          </data>
+          <operador reference="../../../../../operadores/br.pucrs.gcs.xaea12.model.Operador[8]"/>
+          <nrdoc>4499</nrdoc>
+          <descricao>Outro teste</descricao>
+          <valor>450.0</valor>
         </br.pucrs.gcs.xaea12.model.Movimento>
       </movimentos>
     </br.pucrs.gcs.xaea12.model.Conta>
