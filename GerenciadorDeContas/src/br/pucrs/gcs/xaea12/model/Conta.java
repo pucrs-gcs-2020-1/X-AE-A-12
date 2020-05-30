@@ -101,6 +101,9 @@ public final class Conta implements Serializable {
 			this.saldo = Double.valueOf(df.format(this.saldo + mov.getValor()));
 		}
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return String.valueOf(this.numero);
+	}
 }

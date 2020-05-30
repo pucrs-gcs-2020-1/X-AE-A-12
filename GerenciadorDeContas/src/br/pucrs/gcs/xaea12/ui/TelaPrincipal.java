@@ -63,7 +63,7 @@ public class TelaPrincipal extends JFrame {
 	private MovimentosTableModel mtm;
 	private MaskFormatter mascara;
 	private int idxOperador = 0; // index do operador na lista
-	private int idxConta = 5; // index da conta na lista
+	private int idxConta = 0; // index da conta na lista
 	private TelaMovimentacao tmov;
 	private TelaSelecaoOperador tSelOp;
 	private TelaOperador tOp;
@@ -76,6 +76,10 @@ public class TelaPrincipal extends JFrame {
 	}	
 	public void setIdxOperador(int i){
 		this.idxOperador = i;
+	}
+	
+	public void setIdxConta(int c) {
+		this.idxConta = c;
 	}
 	
 	private void splash() {
@@ -136,7 +140,7 @@ public class TelaPrincipal extends JFrame {
 		ajustaTamanhoTabela();
 	}
 	
-	public void ajustaTamanhoTabela() {
+	private void ajustaTamanhoTabela() {
 		// Redimenciona as colunas da tabela para deixar a descrição com todo o restante do espaço
 		tbMovimentos.getColumn(mtm.getColumnName(0)).setPreferredWidth((int)(widthHeight.width*0.1));
 		tbMovimentos.getColumn(mtm.getColumnName(1)).setPreferredWidth((int)(widthHeight.width*0.1));
@@ -146,6 +150,7 @@ public class TelaPrincipal extends JFrame {
 		tbMovimentos.setAutoCreateRowSorter(true);
 		saldoParcial.setText("Saldo parcial: "+mtm.getTotal());
 		mnu4.setText("Saldo: "+NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(db.getContas().get(idxConta).getSaldo()));
+		backup();
 	}
 	
 	private void preparaBtnFiltrar() {
@@ -211,8 +216,7 @@ public class TelaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				new TelaSelecaoConta(tela, db, TP);
 			}
 		});
 		painelBotoes.add(btnAltTrocaCo);
@@ -355,5 +359,9 @@ public class TelaPrincipal extends JFrame {
 		tSelOp.iniciar();
 		tela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		widthHeight = Toolkit.getDefaultToolkit().getScreenSize();
+	}
+	
+	private void backup() {
+		db.salvar();
 	}
 }
