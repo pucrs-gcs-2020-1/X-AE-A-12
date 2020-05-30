@@ -65,6 +65,7 @@ public class TelaPrincipal extends JFrame {
 		preparaBtnNewConta();
 		preparaBtnAltTrocaConta();
 		preparaBtnMovimento();
+		preparaBtnTransferencia();
 		preencheTabela();
 		mostraTela();
 		selecionaOperador();
@@ -98,6 +99,18 @@ public class TelaPrincipal extends JFrame {
 			}
 		});
 		painelBotoes.add(btnMovimento);
+	}
+	
+	private void preparaBtnTransferencia() {
+		JButton btnTransferencia = new JButton("Realizar Transferencia");
+		btnTransferencia.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				TelaTransferencia ttrans = new TelaTransferencia(db.getOperadores().get(idxOperador), db.getContas().get(idxOperador));
+			}
+		});
+		painelBotoes.add(btnTransferencia);
 	}
 
 	private void preparaBtnAltTrocaConta() {
