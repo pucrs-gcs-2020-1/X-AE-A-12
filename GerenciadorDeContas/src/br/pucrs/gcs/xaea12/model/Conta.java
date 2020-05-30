@@ -46,6 +46,42 @@ public final class Conta implements Serializable {
 		seguranca.addAll(movimentos);
 		return seguranca;
 	}
+	
+	public List<Movimento> getFilterMovimentos(Calendar datainicial, Calendar datafinal, String inicialOperador, int tipoReceita) {
+		List<Movimento> seguranca = new ArrayList<Movimento>();
+		boolean data = ((datainicial != null) && (datafinal != null) && (datainicial.compareTo(datafinal) < 0)) ? true : false;
+		for (Movimento m : this.movimentos) {
+			try {
+				if(data) {
+					if(m.getData().compareTo(datainicial) < 0)
+						throw new Exception();
+					if(datafinal.compareTo(m.getData()) < 0)
+						throw new Exception();
+				}
+				if(inicialOperador != null) {
+					if(!m.getOperador().equals(inicialOperador))
+						throw new Exception();
+				}
+				switch (tipoReceita) {
+				case 1:
+					// Receita
+					if(m.getValor() < 0)
+						throw new Exception();
+					break;
+				case 2:
+					// Despesa
+					if(m.getValor() > 0)
+						throw new Exception();
+					break;
+
+				}
+				seguranca.add(m);
+			} catch (Exception e) {
+				// pular
+			}
+		}
+		return seguranca;
+	}
 
 	public void setMovimentos(List<Movimento> movimentos) {
 		this.movimentos = movimentos;
@@ -65,4 +101,6 @@ public final class Conta implements Serializable {
 			this.saldo = Double.valueOf(df.format(this.saldo + mov.getValor()));
 		}
 	}
+	
+	
 }

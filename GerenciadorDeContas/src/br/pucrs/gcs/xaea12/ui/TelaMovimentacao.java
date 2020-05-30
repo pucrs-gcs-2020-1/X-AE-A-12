@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,20 +20,32 @@ import br.pucrs.gcs.xaea12.model.Conta;
 import br.pucrs.gcs.xaea12.model.Movimento;
 import br.pucrs.gcs.xaea12.model.Operador;
 
-public class TelaMovimentacao {
+public class TelaMovimentacao extends JDialog {
 
-	private JFrame movimentacao;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JDialog movimentacao;
 	private Conta conta;
 	private Operador operador;
+	private TelaPrincipal tp;
 	
-	public TelaMovimentacao(Operador operador, Conta conta) {
-		this.conta = conta;
-		this.operador = operador;
-		addMovimentacao();
+	public TelaMovimentacao(TelaPrincipal tela) {
+		this.tp = tela;
+		this.movimentacao = new JDialog(tela);
+		//addMovimentacao();
+	}
+	
+	public void setOperador(Operador op) {
+		this.operador = op;
+	}
+	
+	public void setConta(Conta c) {
+		this.conta = c;
 	}
 
-	private void addMovimentacao() {
-		movimentacao = new JFrame();
+	public void addMovimentacao() {
 		JLabel label_data = new JLabel("Data");
 		JTextField data = new JTextField();
 		JLabel titulo = new JLabel("Adicione os dados da movimenta\u00E7\u00E3o");
@@ -46,10 +59,6 @@ public class TelaMovimentacao {
 		JButton limpar = new JButton("Limpar");
 		JButton voltar = new JButton("Voltar");
 		JSeparator separator = new JSeparator();
-		movimentacao.setBounds(100, 100, 483, 349);
-		movimentacao.setTitle("Adicionar Movimenta\u00E7\u00E3o");
-		movimentacao.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		movimentacao.getContentPane().setLayout(null);
 		valor.setBounds(173, 138, 86, 20);
 		valor.setColumns(10);
 		nroDoc.setBounds(173, 106, 86, 20);
@@ -59,7 +68,7 @@ public class TelaMovimentacao {
 		movimentacao.setVisible(true);
 		movimentacao.setBounds(100, 100, 483, 349);
 		movimentacao.setTitle("Adicionar Movimenta\u00E7\u00E3o");
-		movimentacao.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		movimentacao.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		movimentacao.getContentPane().setLayout(null);
 		
 		label_data.setBounds(36, 80, 46, 14);	
@@ -89,7 +98,7 @@ public class TelaMovimentacao {
 				String valorInformado = valor.getText();
 				String regexData = "[0-3][0-9]/[0-1][0-9]/[1-2][0-9][0-9][0-9]";
 				String regexNroDoc = "[0-9]+";
-				String regexValor = "[0-9]+.\\d{2}";
+				String regexValor = "[-0-9]+[,,.]\\d{2}";
 				Calendar dataFinal = null;
 				if(!dataInformada.matches(regexData)){
 					JOptionPane.showMessageDialog(null, "Por favor preencha a data no padr\u00E3o ano/mes/ano e com uma data válida.", "Erro no formato da data.", JOptionPane.ERROR_MESSAGE);
@@ -98,7 +107,7 @@ public class TelaMovimentacao {
 					JOptionPane.showMessageDialog(null, "Por favor preencha o campo somente com numeros.", "Erro no formato do numero do documento.", JOptionPane.ERROR_MESSAGE);
 				}
 				if(!valorInformado.matches(regexValor)){
-					JOptionPane.showMessageDialog(null, "Por favor preencha o campo no seguinte formato 11.25.", "Erro no formato do valor.", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Por favor preencha o campo no seguinte formato (-0,00 ou 0,00) ou (-0.00 ou 0.00).", "Erro no formato do valor.", JOptionPane.ERROR_MESSAGE);
 				}
 				else{
 					if(descricaoInformada.equals("")) {
@@ -112,10 +121,16 @@ public class TelaMovimentacao {
 						} catch (ParseException e1) {
 							e1.printStackTrace();
 						}
-						int nroDocFinal = Integer.parseInt(nroDocInformado);  
-						double valorfinal = Double.parseDouble(valorInformado);  
-						Movimento movimentacao = new Movimento(dataFinal, operador, nroDocFinal, descricaoInformada, valorfinal);
-						conta.addMovimento(movimentacao);
+						int nroDocFinal = Integer.parseInt(nroDocInformado);
+						double valorfinal = Double.parseDouble(valorInformado.replace(",","."));
+						Movimento movimento = new Movimento(dataFinal, operador, nroDocFinal, descricaoInformada, valorfinal);
+						conta.addMovimento(movimento);
+						tp.preencheTabela();
+						data.setText(null);
+						nroDoc.setText(null);
+						valor.setText(null);
+						descricao.setText(null);
+						movimentacao.dispose();
 					}
 				}
 			}
@@ -138,7 +153,7 @@ public class TelaMovimentacao {
 		voltar.setBounds(348, 166, 95, 23);
 		voltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				movimentacao.setVisible(false);
+				movimentacao.dispose();
 			}
 		});
 		

@@ -1,10 +1,7 @@
 package br.pucrs.gcs.xaea12.ui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -14,11 +11,10 @@ import javax.swing.JTextField;
 
 import br.pucrs.gcs.xaea12.model.Operador;
 import br.pucrs.gcs.xaea12.xml.DBXml;
-import javafx.stage.WindowEvent;
+//import javafx.stage.WindowEvent;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -48,6 +44,7 @@ public class TelaSelecaoOperador extends JDialog {
 	private Operador operadorEscolhido;
 	private int idxOperador;
 	private TelaPrincipal telaprin;
+	private boolean ativo;
 
 	public TelaSelecaoOperador(JFrame frame, DBXml dbData, TelaPrincipal tela) {
 		this.operadores = new ArrayList<>();
@@ -101,6 +98,12 @@ public class TelaSelecaoOperador extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				idxOperador = operadores.indexOf(operadorEscolhido);
 				telaprin.setIdxOperador(idxOperador);
+				if(ativo) {
+					telaprin.preencheDadosTela();
+					telaprin.revalidate();
+				} else {
+					telaprin.retSplash();
+				}
 				frame.dispose();
 			}
 		});
@@ -145,6 +148,10 @@ public class TelaSelecaoOperador extends JDialog {
 	public void addOperador(Operador operador){
 		operadores.add(operador);
 		selecionarOperador.addItem(operador);
+	}
+	
+	public void ativo() {
+		this.ativo = true;
 	}
 
 }
