@@ -32,6 +32,7 @@ import javax.swing.text.MaskFormatter;
 
 import br.pucrs.gcs.xaea12.model.MovimentosTableModel;
 import br.pucrs.gcs.xaea12.model.Operador;
+import br.pucrs.gcs.xaea12.pdf.GerarPDF;
 import br.pucrs.gcs.xaea12.xml.DBXml;
 //import javafx.stage.WindowEvent;
 
@@ -280,10 +281,33 @@ public class TelaPrincipal extends JFrame {
 
 		painelTabela.add(scroll, BorderLayout.CENTER);
 		
+		JPanel painelImpremir = new JPanel(new GridLayout(1, 4));
+		painelImpremir.setPreferredSize(new Dimension(widthHeight.width, 30));
+		JButton btnRelGeral = new JButton("Gerar relatório geral");
+		btnRelGeral.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GerarPDF.relatorioGeral(idxOperador, db);
+			}
+		});
+		painelImpremir.add(btnRelGeral);
+		JButton btnRelParcial = new JButton("Gerar relatório parcial");
+		btnRelParcial.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GerarPDF.relatorioParcial(db.getOperadores().get(idxOperador), db.getContas().get(idxConta), mtm);
+			}
+		});
+		painelImpremir.add(btnRelParcial);
+		painelImpremir.add(new JLabel());
 		saldoParcial = new JLabel();
 		saldoParcial.setHorizontalAlignment(SwingConstants.RIGHT);
 		saldoParcial.setFont(new Font(saldoParcial.getFont().getName(), saldoParcial.getFont().getStyle(), saldoParcial.getFont().getSize()+10));
-		painelTabela.add(saldoParcial, BorderLayout.SOUTH);
+		painelImpremir.add(saldoParcial);
+		
+		painelTabela.add(painelImpremir, BorderLayout.SOUTH);
 		painel.add(painelTabela, BorderLayout.NORTH);
 	}
 
