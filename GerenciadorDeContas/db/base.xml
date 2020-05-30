@@ -847,5 +847,15 @@
       <saldo>0.0</saldo>
       <movimentos/>
     </br.pucrs.gcs.xaea12.model.Conta>
+    <br.pucrs.gcs.xaea12.model.Conta>
+      <numero>247</numero>
+      <criacao>
+        <time>1590858380034</time>
+        <timezone>America/Sao_Paulo</timezone>
+      </criacao>
+      <operador reference="../../../operadores/br.pucrs.gcs.xaea12.model.Operador[5]"/>
+      <saldo>0.0</saldo>
+      <movimentos/>
+    </br.pucrs.gcs.xaea12.model.Conta>
   </contas>
 </dbxml>

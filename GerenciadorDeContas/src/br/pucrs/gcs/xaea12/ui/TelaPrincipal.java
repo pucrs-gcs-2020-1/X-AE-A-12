@@ -228,8 +228,7 @@ public class TelaPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				new TelaConta(tela, db.getOperadores().get(idxOperador), db.getContas(), TP);
 			}
 		});
 		painelBotoes.add(btnNewConta);
